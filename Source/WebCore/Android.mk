@@ -676,8 +676,6 @@ LOCAL_SRC_FILES := $(LOCAL_SRC_FILES) \
 	platform/graphics/android/layers/VideoLayerManager.cpp \
 	\
 	platform/graphics/android/rendering/BaseRenderer.cpp \
-	platform/graphics/android/rendering/GaneshContext.cpp \
-	platform/graphics/android/rendering/GaneshRenderer.cpp \
 	platform/graphics/android/rendering/GLExtras.cpp \
 	platform/graphics/android/rendering/GLUtils.cpp \
 	platform/graphics/android/rendering/ImagesManager.cpp \
