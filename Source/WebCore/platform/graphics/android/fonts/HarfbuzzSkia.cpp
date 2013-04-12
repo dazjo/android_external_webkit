@@ -202,6 +202,8 @@ HB_FontClass harfbuzzSkiaClass = {
 HB_Error harfbuzzSkiaGetTable(void* voidface, const HB_Tag tag, HB_Byte* buffer, HB_UInt* len)
 {
     FontPlatformData* font = reinterpret_cast<FontPlatformData*>(voidface);
+    if (!font->typeface())
+        return HB_Err_Invalid_Argument;
 
     const size_t tableSize = font->typeface()->getTableSize(tag);
     if (!tableSize)
