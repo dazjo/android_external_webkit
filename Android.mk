@@ -82,6 +82,7 @@ WEBCORE_INTERMEDIATES_PATH := $(base_intermediates)/Source/WebCore
 # the right config.h.
 LOCAL_C_INCLUDES := \
 	$(JNI_H_INCLUDE) \
+	$(BASE_PATH)/emoji \
 	$(WEBKIT_PATH)/android/icu \
 	external/ \
 	external/icu4c/common \
@@ -90,7 +91,6 @@ LOCAL_C_INCLUDES := \
 	external/libxml2/include \
 	external/libxslt \
 	external/hyphenation \
-	external/skia/emoji \
 	external/skia/gpu/include \
 	external/skia/include/core \
 	external/skia/include/effects \
@@ -103,7 +103,8 @@ LOCAL_C_INCLUDES := \
 	external/skia/src/ports \
 	external/sqlite/dist \
 	frameworks/base/core/jni/android/graphics \
-	frameworks/base/include
+	frameworks/base/include \
+	frameworks/opt/emoji
 
 # Add Source/ for the include of <JavaScriptCore/config.h> from WebCore/config.h
 LOCAL_C_INCLUDES := $(LOCAL_C_INCLUDES) \
@@ -307,6 +308,7 @@ LOCAL_SHARED_LIBRARIES := \
 	libcrypto \
 	libcutils \
 	libdl \
+	libemoji \
 	libgui \
 	libicuuc \
 	libicui18n \
@@ -394,6 +396,10 @@ LOCAL_SRC_FILES += \
 	Source/WebKit/chromium/src/WebCString.cpp \
 	Source/WebKit/chromium/src/WebRegularExpression.cpp
 endif
+
+# these are for emoji support, needed by webkit
+LOCAL_SRC_FILES += \
+	emoji/EmojiFont.cpp
 
 # Do this dependency by hand. The reason we have to do this is because the
 # headers that this file pulls in are generated during the build of webcore.
