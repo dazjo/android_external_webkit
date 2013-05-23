@@ -91,13 +91,6 @@ LOCAL_C_INCLUDES := \
 	external/libxml2/include \
 	external/libxslt \
 	external/hyphenation \
-	external/skia/gpu/include \
-	external/skia/include/core \
-	external/skia/include/effects \
-	external/skia/include/gpu \
-	external/skia/include/images \
-	external/skia/include/ports \
-	external/skia/include/utils \
 	external/skia/src/core \
 	external/skia/src/images \
 	external/skia/src/ports \
@@ -291,6 +284,10 @@ endif
 ifeq ($(ENABLE_WTF_USE_ACCELERATED_COMPOSITING),true)
 LOCAL_CFLAGS += -DWTF_USE_ACCELERATED_COMPOSITING=1
 endif
+
+# When built as part of the system image we can enable certian non-NDK compliant
+# Skia optimizations.
+LOCAL_CFLAGS += -DSK_BUILD_FOR_ANDROID_FRAMEWORK
 
 # LOCAL_LDLIBS is used in simulator builds only and simulator builds are only
 # valid on Linux

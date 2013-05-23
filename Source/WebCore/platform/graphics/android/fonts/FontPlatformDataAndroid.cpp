@@ -213,7 +213,11 @@ void FontPlatformData::setupPaint(SkPaint* paint) const
     paint->setTextSize(SkFloatToScalar(m_textSize));
     paint->setFakeBoldText(m_fakeBold);
     paint->setTextSkewX(m_fakeItalic ? -SK_Scalar1/4 : 0);
-    paint->setLanguage(s_defaultLanguage);
+
+    SkPaintOptionsAndroid paintOpts = paint->getPaintOptionsAndroid();
+    paintOpts.setLanguage(s_defaultLanguage);
+    paintOpts.setUseFontFallbacks(true);
+    paint->setPaintOptionsAndroid(paintOpts);
 #ifndef SUPPORT_COMPLEX_SCRIPTS
     paint->setTextEncoding(SkPaint::kUTF16_TextEncoding);
 #endif
@@ -258,7 +262,7 @@ unsigned FontPlatformData::hash() const
 bool FontPlatformData::isFixedPitch() const
 {
     if (m_typeface && (m_typeface != hashTableDeletedFontValue()))
-        return m_typeface->isFixedWidth();
+        return m_typeface->isFixedPitch();
     else
         return false;
 }

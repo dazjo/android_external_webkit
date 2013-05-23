@@ -72,6 +72,10 @@ typedef HashMap<FallbackFontKey, FontPlatformData*> FallbackHash;
 static void updateForFont(SkPaint* paint, const SimpleFontData* font) {
     font->platformData().setupPaint(paint);
     paint->setTextEncoding(SkPaint::kGlyphID_TextEncoding);
+
+    SkPaintOptionsAndroid paintOpts = paint->getPaintOptionsAndroid();
+    paintOpts.setUseFontFallbacks(true);
+    paint->setPaintOptionsAndroid(paintOpts);
 }
 
 static SkPaint* setupFill(SkPaint* paint, GraphicsContext* gc,
@@ -711,7 +715,7 @@ const FontPlatformData* TextRunWalker::setupComplexFont(
         if (platformData.typeface())
             currentStyle = platformData.typeface()->style();
         SkTypeface* typeface = SkCreateTypefaceForScript(script, currentStyle,
-            SkPaint::kElegant_Variant);
+            SkPaintOptionsAndroid::kElegant_Variant);
         newPlatformData = new FontPlatformData(platformData, typeface);
         SkSafeUnref(typeface);
         fallbackPlatformData.set(key, newPlatformData);
