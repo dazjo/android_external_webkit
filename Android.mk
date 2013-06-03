@@ -91,6 +91,13 @@ LOCAL_C_INCLUDES := \
 	external/libxml2/include \
 	external/libxslt \
 	external/hyphenation \
+	external/skia/gpu/include \
+	external/skia/include/core \
+	external/skia/include/effects \
+	external/skia/include/gpu \
+	external/skia/include/images \
+	external/skia/include/ports \
+	external/skia/include/utils \
 	external/skia/src/core \
 	external/skia/src/images \
 	external/skia/src/ports \
