@@ -106,7 +106,8 @@ static ANPAudioTrack* ANPCreateTrack(uint32_t sampleRate,
                                             (audio_output_flags_t) 0, // AUDIO_OUTPUT_FLAG_NONE,
                                             callbackProc,
                                             track,
-                                            0);
+                                            0,
+                                            android::AudioTrack::TRANSFER_DEFAULT);
     track->mChannelCount = channelCount;
     
     if (track->mTrack->initCheck() != 0) {  // failure
