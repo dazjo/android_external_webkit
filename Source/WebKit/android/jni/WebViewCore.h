@@ -49,7 +49,7 @@
 #include "SelectText.h"
 
 #include <jni.h>
-#include <androidfw/KeycodeLabels.h>
+#include <input/KeycodeLabels.h>
 #include <ui/PixelFormat.h>
 #include <utils/threads.h>
 #include <wtf/Threading.h>

@@ -68,7 +68,7 @@
 #include <JNIUtility.h>
 #include <JNIHelp.h>
 #include <jni.h>
-#include <androidfw/KeycodeLabels.h>
+#include <input/KeycodeLabels.h>
 #include <wtf/text/AtomicString.h>
 #include <wtf/text/CString.h>
 
