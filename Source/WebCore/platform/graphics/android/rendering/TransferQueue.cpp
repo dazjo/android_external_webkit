@@ -103,7 +103,7 @@ void TransferQueue::initGLResources(int width, int height)
     android::Mutex::Autolock lock(m_transferQueueItemLocks);
     if (!m_sharedSurfaceTextureId) {
         glGenTextures(1, &m_sharedSurfaceTextureId);
-        sp<BufferQueue> bufferQueue(new BufferQueue(true));
+        sp<BufferQueue> bufferQueue(new BufferQueue());
         m_sharedSurfaceTexture =
 #if GPU_UPLOAD_WITHOUT_DRAW
             new android::GLConsumer(bufferQueue, m_sharedSurfaceTextureId,
@@ -113,7 +113,6 @@ void TransferQueue::initGLResources(int width, int height)
                                         GL_TEXTURE_EXTERNAL_OES, true);
 #endif
         m_ANW = new android::Surface(bufferQueue);
-        m_sharedSurfaceTexture->setSynchronousMode(true);
 
         int extraBuffersNeeded = 0;
         m_ANW->query(m_ANW.get(), NATIVE_WINDOW_MIN_UNDEQUEUED_BUFFERS,
