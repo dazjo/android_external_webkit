@@ -184,7 +184,7 @@ static BaseLayerAndroid* nativeDeserializeViewState(JNIEnv* env, jobject, jint v
     if (version == 1) {
         content = new LegacyPictureLayerContent(&stream);
     } else {
-        SkPicture* picture = new SkPicture(&stream);
+        SkPicture* picture = SkPicture::CreateFromStream(&stream);
         content = new PictureLayerContent(picture);
         SkSafeUnref(picture);
     }
@@ -541,7 +541,7 @@ LayerAndroid* deserializeLayer(int version, SkMemoryStream* stream)
         if (version == 1) {
             content = new LegacyPictureLayerContent(stream);
         } else {
-            SkPicture* picture = new SkPicture(stream);
+            SkPicture* picture = SkPicture::CreateFromStream(stream);
             content = new PictureLayerContent(picture);
             SkSafeUnref(picture);
         }

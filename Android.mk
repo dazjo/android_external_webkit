@@ -292,10 +292,6 @@ ifeq ($(ENABLE_WTF_USE_ACCELERATED_COMPOSITING),true)
 LOCAL_CFLAGS += -DWTF_USE_ACCELERATED_COMPOSITING=1
 endif
 
-# When built as part of the system image we can enable certian non-NDK compliant
-# Skia optimizations.
-LOCAL_CFLAGS += -DSK_BUILD_FOR_ANDROID_FRAMEWORK
-
 # LOCAL_LDLIBS is used in simulator builds only and simulator builds are only
 # valid on Linux
 LOCAL_LDLIBS += -lpthread -ldl
