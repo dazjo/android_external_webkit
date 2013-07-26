@@ -125,12 +125,7 @@ String PlatformBridge::resolveFilePathForContentUri(const String& contentUri)
 
 int PlatformBridge::PlatformBridge::screenDepth()
 {
-    android::sp<android::IBinder> display(
-            android::SurfaceComposerClient::getBuiltInDisplay(
-            android::ISurfaceComposer::eDisplayIdMain));
-    android::DisplayInfo info;
-    android::SurfaceComposerClient::getDisplayInfo(display, &info);
-    return info.pixelFormatInfo.bitsPerPixel;
+    return 32;
 }
 
 FloatRect PlatformBridge::screenRect()
