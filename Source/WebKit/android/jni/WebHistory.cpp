@@ -266,7 +266,8 @@ static jobject WebHistoryGetFavicon(JNIEnv* env, jobject obj, jint ptr)
     if (!item->m_faviconCached && item->m_favicon) {
         jobject favicon = GraphicsJNI::createBitmap(env,
                                                     item->m_favicon,
-                                                    false, NULL);
+                                                    GraphicsJNI::kBitmapCreateFlag_Premultiplied,
+                                                    NULL);
         item->m_favicon = 0; // Framework now owns the pointer
         item->m_faviconCached = env->NewGlobalRef(favicon);
         env->DeleteLocalRef(favicon);

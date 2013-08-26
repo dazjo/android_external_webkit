@@ -74,7 +74,7 @@ jobject webcoreImageToJavaBitmap(JNIEnv* env, WebCore::Image* icon)
     SkBitmap* bm = webcoreImageToSkBitmap(icon);
     if (!bm)
         return 0;
-    return GraphicsJNI::createBitmap(env, bm, false, NULL);
+    return GraphicsJNI::createBitmap(env, bm, GraphicsJNI::kBitmapCreateFlag_Premultiplied, NULL);
 }
 
 static WebIconDatabase* gIconDatabaseClient = new WebIconDatabase();
