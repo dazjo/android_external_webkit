@@ -154,19 +154,37 @@ static bool nativeSerializeViewState(JNIEnv* env, jobject, jint jbaseLayer,
 static BaseLayerAndroid* nativeDeserializeViewState(JNIEnv* env, jobject, jint version,
                                                     jobject jstream, jbyteArray jstorage)
 {
-    // FIXME: If LegacyPictureLayerContent did not require an SkMemoryStream (and a subclass
-    // of SkStream implemented getAtPos), this copy could be avoided.
-    SkAutoTUnref<SkMemoryStream> stream(CopyJavaInputStream(env, jstream, jstorage));
-    if (!stream.get())
+    SkStream* javaStream = CreateJavaInputStreamAdaptor(env, jstream, jstorage);
+    if (!javaStream)
         return 0;
 
-    Color color = stream->readU32();
+    // read everything into memory so that we can get the offset into the stream
+    // when necessary. This is needed for the LegacyPictureLayerContent.
+    SkDynamicMemoryWStream tempStream;
+    const int bufferSize = 256*1024; // 256KB
+    uint8_t buffer[bufferSize];
+    int bytesRead = 0;
+
+    do {
+      bytesRead = javaStream->read(buffer, bufferSize);
+      tempStream.write(buffer, bytesRead);
+    } while (bytesRead != 0);
+
+    SkMemoryStream stream;
+    stream.setData(tempStream.copyToData())->unref();
+
+    // clean up the javaStream now that we have everything in memory
+    delete javaStream;
+
+    Color color = stream.readU32();
+
+
 
     LayerContent* content;
     if (version == 1) {
-        content = new LegacyPictureLayerContent(stream.get());
+        content = new LegacyPictureLayerContent(&stream);
     } else {
-        SkPicture* picture = SkPicture::CreateFromStream(stream.get());
+        SkPicture* picture = SkPicture::CreateFromStream(&stream);
         content = new PictureLayerContent(picture);
         SkSafeUnref(picture);
     }
@@ -179,9 +197,9 @@ static BaseLayerAndroid* nativeDeserializeViewState(JNIEnv* env, jobject, jint v
     layer->markAsDirty(dirtyRegion);
 
     SkSafeUnref(content);
-    int childCount = stream->readS32();
+    int childCount = stream.readS32();
     for (int i = 0; i < childCount; i++) {
-        LayerAndroid* childLayer = deserializeLayer(version, stream.get());
+        LayerAndroid* childLayer = deserializeLayer(version, &stream);
         if (childLayer)
             layer->addChild(childLayer);
     }
