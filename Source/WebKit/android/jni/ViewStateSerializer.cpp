@@ -46,6 +46,7 @@
 #include "SkPicture.h"
 #include "TilesManager.h"
 
+#include <cutils/log.h>
 #include <JNIUtility.h>
 #include <JNIHelp.h>
 #include <jni.h>

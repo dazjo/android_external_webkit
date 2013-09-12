@@ -25,6 +25,7 @@
 
 #include "config.h"
 
+#include <cutils/log.h>
 #include <JNIHelp.h>  // For jniRegisterNativeMethods
 #include "GeolocationPermissions.h"
 #include "WebCoreJni.h"  // For jstringToWtfString

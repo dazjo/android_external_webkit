@@ -28,6 +28,7 @@
 #include "ChromiumIncludes.h"
 #include "WebCookieJar.h"
 #include "WebCoreJni.h"
+#include <cutils/log.h>
 #include <JNIHelp.h>
 
 using namespace base;

@@ -53,6 +53,7 @@
 #include "WebRequestContext.h"
 #include "WebViewCore.h"
 
+#include <cutils/log.h>
 #include <JNIHelp.h>
 #include <utils/misc.h>
 #include <wtf/text/CString.h>
