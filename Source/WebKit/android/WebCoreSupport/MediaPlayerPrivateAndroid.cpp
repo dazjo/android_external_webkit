@@ -36,6 +36,7 @@
 #include "VideoLayerAndroid.h"
 #include "WebCoreJni.h"
 #include "WebViewCore.h"
+#include <cutils/log.h>
 #include <GraphicsJNI.h>
 #include <JNIHelp.h>
 #include <JNIUtility.h>

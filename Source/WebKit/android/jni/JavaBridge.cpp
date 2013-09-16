@@ -44,6 +44,7 @@
 #include "WebCache.h"
 #include "WebCoreJni.h"
 
+#include <cutils/log.h>
 #include <JNIHelp.h>
 #include <JNIUtility.h>
 #include <SkUtils.h>

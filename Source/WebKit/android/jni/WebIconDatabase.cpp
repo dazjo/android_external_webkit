@@ -37,6 +37,7 @@
 #include "KURL.h"
 #include "WebCoreJni.h"
 
+#include <cutils/log.h>
 #include <JNIHelp.h>
 #include <JNIUtility.h>
 #include <SharedBuffer.h>

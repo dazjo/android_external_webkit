@@ -30,6 +30,7 @@
 
 #include "WebViewCore.h"
 
+#include <cutils/log.h>
 #include <GeolocationError.h>
 #include <GeolocationPosition.h>
 #include "JNIHelp.h"

@@ -137,6 +137,7 @@
 #include "unicode/uloc.h"
 #include "visible_units.h"
 
+#include <cutils/log.h>
 #include <JNIHelp.h>
 #include <JNIUtility.h>
 #include <input/KeycodeLabels.h>

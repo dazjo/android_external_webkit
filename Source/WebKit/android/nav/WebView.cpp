@@ -65,6 +65,7 @@
 
 #define GET_NATIVE_VIEW(env, obj) ((WebView*)env->GetIntField(obj, gWebViewField))
 
+#include <cutils/log.h>
 #include <JNIUtility.h>
 #include <JNIHelp.h>
 #include <jni.h>

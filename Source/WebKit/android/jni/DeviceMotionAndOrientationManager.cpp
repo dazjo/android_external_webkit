@@ -33,6 +33,7 @@
 #include "Frame.h"
 #include "Page.h"
 
+#include <cutils/log.h>
 #include <DeviceOrientationClientMock.h>
 #include <JNIHelp.h>
 

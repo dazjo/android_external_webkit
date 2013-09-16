@@ -36,6 +36,7 @@
 #include "SecurityOrigin.h"
 #include "WebCoreJni.h"
 
+#include <cutils/log.h>
 #include <JNIHelp.h>
 
 namespace android {
