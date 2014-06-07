@@ -102,6 +102,7 @@ LOCAL_SRC_FILES += \
 	android/plugins/PluginViewBridgeAndroid.cpp \
 	android/plugins/PluginWidgetAndroid.cpp \
 	android/plugins/SkANP.cpp \
+	android/plugins/SkFlipPixelRef.cpp \
 	\
 	android/wds/Command.cpp \
 	android/wds/ConnectionAndroid.cpp \

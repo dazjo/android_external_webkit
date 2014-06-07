@@ -57,12 +57,16 @@ BitmapAllocatorAndroid::~BitmapAllocatorAndroid()
 bool BitmapAllocatorAndroid::allocPixelRef(SkBitmap* bitmap, SkColorTable*)
 {
     SkPixelRef* ref;
+    SkImageInfo info;
+    if (!bitmap->asImageInfo(&info)) {
+        return false;
+    }
     if (should_use_ashmem(*bitmap)) {
 //        SkDebugf("ashmem [%d %d]\n", bitmap->width(), bitmap->height());
-        ref = new SkImageRef_ashmem(fStream, bitmap->config(), fSampleSize);
+        ref = new SkImageRef_ashmem(info, fStream, fSampleSize);
     } else {
 //        SkDebugf("globalpool [%d %d]\n", bitmap->width(), bitmap->height());
-        ref = new SkImageRef_GlobalPool(fStream, bitmap->config(), fSampleSize);
+        ref = new SkImageRef_GlobalPool(info, fStream, fSampleSize);
     }
     bitmap->setPixelRef(ref)->unref();
     return true;

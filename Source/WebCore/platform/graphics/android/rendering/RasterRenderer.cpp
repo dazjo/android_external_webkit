@@ -34,9 +34,9 @@
 #include "AndroidLog.h"
 #include "GLUtils.h"
 #include "SkBitmap.h"
+#include "SkBitmapDevice.h"
 #include "SkBitmapRef.h"
 #include "SkCanvas.h"
-#include "SkDevice.h"
 #include "Tile.h"
 #include "TilesManager.h"
 
@@ -67,7 +67,7 @@ void RasterRenderer::setupCanvas(const TileRenderInfo& renderInfo, SkCanvas* can
     TRACE_METHOD();
 
     if (renderInfo.baseTile->isLayerTile()) {
-        m_bitmap.setIsOpaque(false);
+        m_bitmap.setAlphaType(kPremul_SkAlphaType);
 
         // clear bitmap if necessary
         if (!m_bitmapIsPureColor || m_bitmapPureColor != Color::transparent)
@@ -80,7 +80,7 @@ void RasterRenderer::setupCanvas(const TileRenderInfo& renderInfo, SkCanvas* can
             background = &defaultBackground;
         }
         ALOGV("setupCanvas use background on Base Layer %x", background->rgb());
-        m_bitmap.setIsOpaque(!background->hasAlpha());
+        m_bitmap.setAlphaType(background->hasAlpha() ? kPremul_SkAlphaType : kOpaque_SkAlphaType);
 
         // fill background color if necessary
         if (!m_bitmapIsPureColor || m_bitmapPureColor != *background)
@@ -88,7 +88,7 @@ void RasterRenderer::setupCanvas(const TileRenderInfo& renderInfo, SkCanvas* can
                                background->green(), background->blue());
     }
 
-    SkDevice* device = new SkDevice(m_bitmap);
+    SkBitmapDevice* device = new SkBitmapDevice(m_bitmap);
 
     canvas->setDevice(device);
 

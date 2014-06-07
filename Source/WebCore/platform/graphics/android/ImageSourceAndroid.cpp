@@ -59,11 +59,10 @@
     #define MAX_SIZE_BEFORE_SUBSAMPLE   (32*1024*1024)
 
     // preserve quality for 24/32bit src
-    static const SkBitmap::Config gPrefConfigTable[6] = {
+    static const SkImageDecoder::PrefConfigTable gPrefConfigTable = {
         SkBitmap::kIndex8_Config,       // src: index, opaque
         SkBitmap::kIndex8_Config,       // src: index, alpha
-        SkBitmap::kRGB_565_Config,      // src: 16bit, opaque
-        SkBitmap::kARGB_8888_Config,    // src: 16bit, alpha  (promote to 32bit)
+        SkBitmap::kNo_Config,
         SkBitmap::kARGB_8888_Config,    // src: 32bit, opaque
         SkBitmap::kARGB_8888_Config,    // src: 32bit, alpha
     };
@@ -71,11 +70,10 @@
     #define MAX_SIZE_BEFORE_SUBSAMPLE   (2*1024*1024)
 
     // tries to minimize memory usage (i.e. demote opaque 32bit -> 16bit)
-    static const SkBitmap::Config gPrefConfigTable[6] = {
+    static const SkImageDecoder::PrefConfigTable gPrefConfigTable = {
         SkBitmap::kIndex8_Config,       // src: index, opaque
         SkBitmap::kIndex8_Config,       // src: index, alpha
-        SkBitmap::kRGB_565_Config,      // src: 16bit, opaque
-        SkBitmap::kARGB_8888_Config,    // src: 16bit, alpha  (promote to 32bit)
+        SkBitmap::kNo_Config,
         SkBitmap::kRGB_565_Config,      // src: 32bit, opaque (demote to 16bit)
         SkBitmap::kARGB_8888_Config,    // src: 32bit, alpha
     };
